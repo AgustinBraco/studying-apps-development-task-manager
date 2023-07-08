@@ -21,12 +21,28 @@ export default function App() {
 		setTask(text);
 	};
 
+// Obtiene la fecha actual en milisegundos
+var dateMs = Date.now();
+
+// Crea un objeto Date utilizando los milisegundos
+var dateFormatted = new Date(dateMs);
+
+// Formatea la fecha en DD/MM/AAAA
+var date = dateFormatted.toLocaleDateString('es-ES', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+	hour: '2-digit',
+  minute: '2-digit'
+});
+
 	const onHandlerCreateTask = () => {
 		setTasks([
 			...tasks, 
 			{
-				id: Date.now().toString(),
-				value: task
+				id: dateMs.toString(),
+				date: date,
+				value: task,
 			}
 		]);
 
@@ -38,9 +54,12 @@ export default function App() {
 		setSelectedTask(item);
 	};
 
-	// const onHandlerDone = (id) => {
+	const onHandlerDone = (id) => {
+		setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
 
-	// };
+		// En vez de borrarlo, hacer lógica para tacharlo
+		setIsVisible(false);
+	};
 
 	const onHandlerDelete = (id) => {
 		setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
@@ -84,25 +103,28 @@ export default function App() {
 				/>
 			</View>
 
-			<Modal visible={isVisible} animationType="slide">
-				<View style={styles.modalContainer}>
-					<View style={styles.modalTextsContainer}>
-						<Text style={styles.modalTitle}>{selectedTask?.id}</Text>
-						<Text style={styles.modalText}>{selectedTask?.value}</Text>
-					</View>
+			<Modal visible={isVisible} animationType="fade">
+				<View style={styles.modalView}>
+					
+					<View style={styles.modalContainer}>
+						<View style={styles.modalTextsContainer}>
+							<Text style={styles.modalDate}>{selectedTask?.date}</Text>
+							<Text style={styles.modalText}>{selectedTask?.value}</Text>
+						</View>
 
-					<View>
-						<TouchableOpacity style={styles.modalDelete} onPress={() => onHandlerDelete(selectedTask?.id)}>
-							<Text style={styles.modalDeleteText}>Delete</Text>
-						</TouchableOpacity>
+						<View style={styles.modalButtonsContainer}>
+							<TouchableOpacity onPress={() => onHandlerDelete(selectedTask?.id)}>
+								<Text style={styles.modalDeleteText}>Delete</Text>
+							</TouchableOpacity>
 
-						<TouchableOpacity style={styles.modalDone} onPress={() => onHandlerDelete(selectedTask?.id)}>
-							<Text style={styles.modalDoneText}>Done</Text>
-						</TouchableOpacity>
+							<TouchableOpacity onPress={() => onHandlerDone(selectedTask?.id)}>
+								<Text style={styles.modalDoneText}>Done</Text>
+							</TouchableOpacity>
 
-						<TouchableOpacity style={styles.modalClose} onPress={() => setIsVisible(false)}>
-							<Text style={styles.modalCloseText}>Close</Text>
-						</TouchableOpacity>
+							<TouchableOpacity onPress={() => setIsVisible(false)}>
+								<Text style={styles.modalCloseText}>Close</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
 				</View>
 			</Modal>
