@@ -1,0 +1,72 @@
+import { StyleSheet } from "react-native";
+
+export const styles = StyleSheet.create({
+  modalView: {
+    flex: 1,
+    paddingTop: 100,
+    backgroundColor: '#A5C9CA',
+  },
+  modalContainer: {
+    backgroundColor: "white",
+    // flex: 0.35,
+    padding: 20,
+    marginHorizontal: 30,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "space-around",
+  },
+  modalTextsContainer: {
+    gap: 20,
+  },
+  modalDate: {
+    fontSize: 18,
+    textAlign: "center",
+  },
+  modalText: {
+    textAlign: "center",
+    fontSize: 24,
+    fontWeight: "bold",
+    margin: 10,
+  },
+  modalButtonsContainer: {
+    marginTop: 10,
+    flexDirection: "row",
+    gap: 30,
+  },
+  modalDeleteText: {
+    width: 80,
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    textAlignVertical: "center",
+    padding: 7,
+    borderWidth: 2,
+    borderRadius: 15,
+    borderColor: "#B70404",
+    color: "#B70404",
+  },
+  modalDoneText: {
+    width: 80,
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    textAlignVertical: "center",
+    padding: 7,
+    borderWidth: 2,
+    borderRadius: 15,
+    borderColor: "#1B9C85",
+    color: "#1B9C85",
+  },
+  modalCloseText: {
+    width: 80,
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    textAlignVertical: "center",
+    padding: 7,
+    borderWidth: 2,
+    borderRadius: 15,
+    borderColor: "#000000",
+    color: "#000000",
+  },
+});
